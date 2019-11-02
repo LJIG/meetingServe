@@ -1,24 +1,21 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <br/><br/>
-    <a href="showPage">主屏内容</a>
-    <br/><br/>
-    <a href="controller">资源控制</a>
+  <div id="showPage">
+    <img alt="Vue logo" src="@/assets/logo.png">
+    <h2>主屏幕</h2>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'app',
+  name: 'showPage',
   components: {
   }
 }
 </script>
 
 <style>
-#app {
+#showPage {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
