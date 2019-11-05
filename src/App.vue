@@ -2,9 +2,9 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <br/><br/>
-    <a href="showPage">主屏内容</a>
+    <a href="showPage" target="_blank">主屏内容</a>
     <br/><br/>
-    <a href="controller">资源控制</a>
+    <a href="controller" target="_blank">资源控制</a>
   </div>
 </template>
 
