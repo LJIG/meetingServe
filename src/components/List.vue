@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <button @click="setFile()">修改lfiles</button>
+    <button @click="postData()">发送数据</button>
     name {{name}}
     <br />
     files {{files}}
@@ -21,12 +22,14 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { GETDATA as Variable } from '@/utils/variable'
 export default {
   components: {},
   props: {},
   data () {
     return {
-      fileList: []
+      fileList: [],
+      bgImg:''
     }
   },
   watch: {
@@ -42,7 +45,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions('file',{
+    ...mapActions('file', {
       fileSetFile: 'setFiles'
     }),
     escape (str) {
@@ -60,17 +63,27 @@ export default {
     },
     getFile () {
       const list = this.fileList
+      const that = this
 
       list.forEach(i => {
-        let reader = new FileReader()
-        reader.readAsDataURL(i)
+        if (!i.type.match('image.*')) {
+          return
+        }
+
+        let reader = new FileReader();
+        reader.readAsDataURL(i);
         reader.onload = function () {
-          window.console.log(this.result)
+          window.console.log(i.name)
+          that.bgImg =this.result
+          // window.console.log()
         }
       })
     },
     setFile () {
       this.fileSetFile([3456])
+    },
+    postData () {
+      window.localStorage.setItem(Variable, this.bgImg)
     }
   },
   created () { },

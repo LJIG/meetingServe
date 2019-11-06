@@ -1,23 +1,47 @@
 <template>
   <div id="showPage">
-    <img alt="Vue logo" src="@/assets/logo.png" />
+    <img alt="Vue logo" :src="bgImg" />
     <h2>主屏幕</h2>
-    {{files}}
-    <button @click="setFiles([222])">test</button>
+    <!-- -{{funStr}}- -->
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { GETDATA as Variable } from '@/utils/variable'
 export default {
   name: 'showPage',
   components: {
   },
+  data () {
+    return {
+      funStr: '',
+      bgImg: '@/assets/logo.png'
+    }
+  },
   computed: {
-    ...mapState('file', {
-      files: state => state.files
-    })
-  }
+  },
+  mounted () {
+    this.info()
+  },
+  methods: {
+    setFunStr () {
+      const now = window.localStorage[Variable]
+      if (now && now != this.funStr) {
+        this.funStr = now
+        this.bgImg = now
+        window.console.log(now)
+      }
+    },
+    changeStore () {
+      setInterval(() => { this.setFunStr() }, 1000)
+    },
+    info () {
+      this.funStr = window.localStorage[Variable]
+      this.changeStore()
+    }
+  },
+  created () {
+  },
 }
 </script>
 

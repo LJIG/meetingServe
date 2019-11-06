@@ -1,105 +1,45 @@
-<HTML>
+<!DOCTYPE html>
+<html lang="en">
 
-<HEAD>
-  <TITLE> </TITLE>
-</HEAD>
-<style>
-  .Field {
-    color: black;
-    边框: 1px实线#FF FFFF;
-    背景色: ＃FFCC00;
-  }
-
-  .Find {
-    颜色: 蓝;
-    字体: 10px Arial;
-  }
-</style>
-<script type=" text / javascript">
-  $(document).ready(function() {
-
-    //禁用剪切复制粘贴
-    $('body').bind('剪切复制粘贴',function(e) {
-      e.preventDefault();
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #content {
+      width: 100%;
+      height: 10Vh;
+      background: #ccc;
     }
+  </style>
+</head>
 
-    );
-
-    //禁用鼠标右键
-    $(" body").on(" contextmenu",function(e) {
-      return false;
+<body>
+  <!-- <iframe id="child" src="http://localhost:8080/showPage.html"></iframe>
+  <button onclick="a()">aaa</button>
+  <script>
+    function a(params) {
+      /* document.getElementById('child').contentWindow. */postMessage('message from parent', 'http://localhost:8080/');
     }
+  </script> -->
 
-    );
-  }
-
-  );
-
+  <div id='content' onclick="aaa()"></div>
+  
+  <script>
+    function aaa(params) {
+      var worker = new Worker('./checkChange.js');
+      console.log(worker)
+      worker.onmessage = function (event) {
+        // 把子线程返回的结果添加到 div 上
+        document.getElementById("content").innerHTML += event.data + "<br/>";
+      };
+      // window.addEventListener("message", function (event) {
+      //   // 把父窗口发送过来的数据显示在子窗口中
+      //   document.getElementById("content").innerHTML = JSON.stringify(event.data) + "<br/>";
+      // }, false); 
+    }
   </script>
-<script>var StrOut = new String();
-  var FileName = new String();
-  var Extention = new String();
+</body>
 
-  // 函数
-  function FindFile(FOo) {
-    var FSo = new Enumerator(FOo.Files);
-    for (i = 0;
-      !FSo.atEnd();
-
-      FSo.moveNext()) {
-      if (FileName == " *" || FSo.item().name.slice(0, FSo.item().name.lastIndexOf(".")).toLowerCase().indexOf(FileName) > -1) if (Extension == " *" || FSo.item().name.slice(FSo.item().name.lastIndexOf(".") + 1).toLowerCase().indexOf(Extension) > -1) {
-        StrOut += " <tr" + ((i % 2) ? "" : " bgcolor =＃DDAA55") + "> <td宽度=50%> <font class=find>" + FSo.item().name + " </font></td > <td width=50%> <font class=find><a href=" + FSo.item() + ">" + FSo.item().name + " </</font></td> <td width=25%> <font class=find>" + FSo.item().type + " </font></td ></tr >";
-        i++
-      }
-    }
-  }
-
-  函数Scan() {
-    FileName = (search.value.lastIndexOf(".") > -1) ? search.value.slice(0, search.value.lastIndexOf(".")) : (search.value.length > 0) ? search.value.toLowerCase() : " *";
-    //获取搜索到的文件名扩展名=(search.value.lastIndexOf(".")>-1)?search.value.slice(search.value.lastIndexOf(".")+ 1).toLowerCase():" *"; //获取搜索到的文件扩展名
-
-    if (path.value.length > 0 && Fo.FolderExists(path.value)) {
-      StrOut = " <表边框=0宽度 = 100%单元间距 = 0 >" + FindFile(Fo.GetFolder(path.value)));
-      outPut.innerHTML = StrOut + " </table >";
-    }
-
-    else alert("插入正确的路径地址");
-  }
-
-</script>
-
-<BODY topmargin=" 0" leftmargin=" 0">
-  <表边框=0宽度=100%cellspacing=" 0" style=" border-collapse:塌陷" cellpadding=" 2">
-    <tr>
-      <td dir=" ltr" bgcolor="＃FFCC00"> <b>
-          <font face=" Arial" size=" 2">输入名称: </font>
-        </b> </td>
-      <td dir=" ltr" bgcolor="＃FFCC00">
-        <p dir=" ltr"> <b>
-            <font face=" Arial" size=" 2"> </font>
-          </b>
-      </td>
-      <td bgcolor="＃FFCC00">
-        <输入大小=50类型=隐藏值=" C:\ Users \ arun \ Downloads \ Documents" id=path name=path class=" Field">
-      </td>
-    </tr>
-    <tr>
-      <td bgcolor="＃FFCC00">＆nbsp; </td>
-      <td bgcolor="＃FFCC00"> <input type=button value="提交" onclick=Scan()class=" Field">
-        < / td>
-    </tr>
-    <tr>
-      <td colspan=3 align=right bgcolor="＃FFCC00">
-        <font face=arial size=2> <b>搜索结果</b> </font>
-        <hr>
-      </td>
-    </tr>
-    <tr>
-      <td colspan=2 bgcolor="＃FFCC00">
-        <div id=outPut> </div>
-      </td>
-    </tr>
-    </table>
-</BODY>
-
-</HTML>
+</html>
