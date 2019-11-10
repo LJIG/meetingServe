@@ -2,15 +2,17 @@
   <div id="showPage">
     <img alt="Vue logo" :src="bgImg" />
     <h2>主屏幕</h2>
-    <!-- -{{funStr}}- -->
+    <video-box/>
   </div>
 </template>
 
 <script>
 import { GETDATA as Variable } from '@/utils/variable'
+import VideoBox from '@/components/VideoBox'
 export default {
   name: 'showPage',
   components: {
+    VideoBox
   },
   data () {
     return {
