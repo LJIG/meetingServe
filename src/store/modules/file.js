@@ -1,5 +1,5 @@
 const state = {
-  files: [11]
+  imgFiles: [],
 }
 
 const getters = {
@@ -16,7 +16,8 @@ const actions = {
 
 const mutations = {
   FILES (state, newFile) {
-    state.files = newFile
+    const storeType = 'imgFiles'
+    state[storeType] = newFile
   }
 }
 
