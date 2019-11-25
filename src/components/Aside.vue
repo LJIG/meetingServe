@@ -1,24 +1,40 @@
 <template>
   <div class="wrapper">
-    <el-button round>图片</el-button>
-    <el-button round>音乐</el-button>
-    <el-button round>视频</el-button>
-    <el-button round>背景图</el-button>
-    <el-button round>任务计划</el-button>
+    <el-button
+      v-for="(item,index) in fileList"
+      :key="index"
+      round
+      @click="changeList(item.file)"
+    >{{item.name}}</el-button>
+    <el-button round @click="changeList('task')">任务计划</el-button>
   </div>
 </template>
 
 <script>
+import { list_docmentName } from '@/components'
+import { mapState, mapActions } from 'vuex'
 export default {
   components: {},
   props: {},
   data () {
     return {
+      fileList: list_docmentName
     }
   },
   watch: {},
-  computed: {},
-  methods: {},
+  computed: {
+    ...mapState('listStatus', {
+      currentState: state => state.current
+    })
+  },
+  methods: {
+    ...mapActions('listStatus', {
+      setStatus: 'changeStatus'
+    }),
+    changeList (type) {
+      this.setStatus(type)
+    }
+  },
   created () { },
   mounted () { }
 }

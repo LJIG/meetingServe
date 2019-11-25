@@ -63,10 +63,7 @@ export default {
       const isLt2M = file.size / 1024 / 1024 < 2
 
       if (!isType) {
-        this.$message.error('上传图片只能是 JPG/PNG 格式!')
-      }
-      if (!isLt2M) {
-        this.$message.error('上传图片大小不能超过 2MB!')
+        this.$message.error('所选图片只能是 JPG/PNG 格式!')
       }
       return isType && isLt2M
     },
@@ -80,13 +77,8 @@ export default {
     bindBgImg (file) {
       if (this.checkImg(file)) {
         const path = this.basePath + '/' + file.name
-        console.log(file, path)
         this.postData(BACKGROUND_IMG, path)
-        // this.fileSetFile({ type: 'bgImg', path })
       }
-      // this.$refs.upImg.abort()
-      // this.$refs.upImg.submit()
-      // this.$refs.upImg.clearFiles()
       return false
     },
     setImg (path) {

@@ -6,7 +6,6 @@
     <template slot="aside">
       <Aside />
     </template>
-    <img-list slot="list"/>
     <div slot="footer">
       左右左右BABA
     </div>
@@ -15,7 +14,6 @@
 
 <script>
 import Container from '@/components/Container.vue'
-import ImgList from '@/components/ImgList.vue'
 import Header from '@/components/Header.vue'
 import Aside from '@/components/Aside.vue'
 export default {
@@ -23,8 +21,7 @@ export default {
   components: {
     Container,
     Header,
-    Aside,
-    ImgList
+    Aside
   },
   data () {
     return {

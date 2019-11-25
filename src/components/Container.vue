@@ -11,11 +11,14 @@
         <el-container>
           <el-main>
             <el-aside :width="listWidth">
-              <slot name="list" />
+              <keep-alive>
+                <component :is="current" />
+                <ImgList v-if="!current" />
+              </keep-alive>
             </el-aside>
           </el-main>
           <el-footer>
-            <slot name="footer"/>
+            <slot name="footer" />
           </el-footer>
         </el-container>
       </el-container>
@@ -24,8 +27,12 @@
 </template>
 
 <script>
+import ImgList from '@/components/ImgList.vue'
+import AudioList from '@/components/AudioList.vue'
+import VideoList from '@/components/VideoList.vue'
+import { mapState } from 'vuex'
 export default {
-  components: {},
+  components: { ImgList, AudioList, VideoList },
   props: {
     binWidth: {
       type: String,
@@ -43,7 +50,11 @@ export default {
     }
   },
   watch: {},
-  computed: {},
+  computed: {
+    ...mapState('listStatus', {
+      current: state => state.current
+    })
+  },
   methods: {},
   created () { },
   mounted () { }
