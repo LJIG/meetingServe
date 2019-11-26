@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div id="dplayer"></div>
-    <button class="nextBtn" @click="bindNext">Next</button>
+    <button class="nextBtn" @click="bindNext('./video/7557ec8406772f867ea8d30f70cd1c9f.mp4')">Next</button>
   </div>
 </template>
 
@@ -10,20 +10,39 @@ import 'dplayer/dist/DPlayer.min.css';
 import DPlayer from 'dplayer';
 export default {
   components: {},
-  props: {},
+  props: {
+    src: {
+      type: String,
+      default: ''
+    },
+  },
   data () {
     return {
       playerObj: null
     }
   },
-  watch: {},
+  watch: {
+    src (newval) {
+      this.bindNext(newval)
+      this._startPlay()
+    }
+  },
   computed: {},
   methods: {
-    bindNext () {
+    bindNext (url) {
       if (this.playerObj === null) {
         return
       }
-      this.playerObj.switchVideo({ url: './video/7557ec8406772f867ea8d30f70cd1c9f.mp4' })
+      this.playerObj.switchVideo({ url })
+    },
+    _startPlay () {
+      this.playerObj.play()
+    },
+    _stopPlay () {
+      this.playerObj.pause()
+    },
+    setVolume (percentage) {
+      this.playerObj.volume(percentage, true, false)
     }
   },
   created () {
@@ -32,7 +51,6 @@ export default {
     const dp = new DPlayer({
       container: document.getElementById('dplayer'),
       video: {
-        // url: '7557ec8406772f867ea8d30f70cd1c9f.mp4',
         url: './audio/陈奕迅 - 阴天快乐.flac'
       },
       loop: true,

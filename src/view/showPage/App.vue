@@ -2,12 +2,12 @@
   <div id="showPage">
     <img alt="Vue logo" :src="bgImg" />
     <h2>主屏幕</h2>
-    <video-box />
+    <video-box :src="videoStr"/>
   </div>
 </template>
 
 <script>
-import { GETDATA as Variable, BACKGROUND_IMG } from '@/utils/variable'
+import { GETDATA as Variable, BACKGROUND_IMG, VIDEO_PATH } from '@/utils/variable'
 import VideoBox from '@/components/VideoBox'
 export default {
   name: 'showPage',
@@ -17,7 +17,8 @@ export default {
   data () {
     return {
       funStr: '',
-      bgImg: './image/logo.png'
+      bgImg: './image/logo.png',
+      videoStr: ''
     }
   },
   computed: {
@@ -34,8 +35,12 @@ export default {
       //   window.console.log(now)
       // }
       const BG_Img = window.localStorage[BACKGROUND_IMG]
+      const video_src = window.localStorage[VIDEO_PATH]
       if (BG_Img && BG_Img != this.bgImg) {
         this.bgImg = BG_Img
+      }
+      if (video_src && video_src != this.videoStr) {
+        this.videoStr = video_src
       }
     },
     changeStore () {

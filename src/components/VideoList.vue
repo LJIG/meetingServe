@@ -12,7 +12,7 @@
     </el-row>
     <el-row>
       <ul>
-        <li v-for="(item,index) in fileArr" :key="index">{{item}}</li>
+        <li v-for="(item,index) in fileArr" :key="index" @click="setVideo(item)">{{item}}</li>
       </ul>
     </el-row>
   </div>
@@ -20,6 +20,7 @@
 
 <script>
 let console = window.console
+import { VIDEO_PATH } from '@/utils/variable.js'
 export default {
   components: {},
   props: {},
@@ -54,7 +55,10 @@ export default {
       }
       return false
     },
-    bindReset () { }
+    bindReset () { },
+    setVideo (path) {
+      window.localStorage.setItem(VIDEO_PATH, path)
+    }
   },
   created () { },
   mounted () { }
@@ -64,5 +68,8 @@ export default {
 .wrapper {
   padding: 0px;
   margin: 0px;
+}
+li {
+  line-height: inherit;
 }
 </style>
