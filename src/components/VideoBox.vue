@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div id="dplayer"></div>
-    <button class="nextBtn" @click="bindNext('./video/7557ec8406772f867ea8d30f70cd1c9f.mp4')">Next</button>
+    <!-- <button class="nextBtn" @click="bindNext('./video/7557ec8406772f867ea8d30f70cd1c9f.mp4')">Next</button> -->
   </div>
 </template>
 
@@ -25,6 +25,7 @@ export default {
     src (newval) {
       this.bindNext(newval)
       this._startPlay()
+      window.console.log(newval)
     }
   },
   computed: {},
@@ -37,6 +38,7 @@ export default {
     },
     _startPlay () {
       this.playerObj.play()
+      this.playerObj.fullScreen.request('browser');
     },
     _stopPlay () {
       this.playerObj.pause()
@@ -79,8 +81,11 @@ export default {
 .wrapper {
   padding: 0px;
   margin: 0px;
+  width: 100vw;
+  height: 100vh;
 }
 #dplayer {
-  height: 50vh;
+  height: 100%;
+  width: 100%;
 }
 </style>

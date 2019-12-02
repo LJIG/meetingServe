@@ -10,10 +10,10 @@
         <div class="grid-content bg-purple-light btns">
           <el-button round>静音</el-button>
           <el-button round>暂停</el-button>
-          <el-button round>单曲循环</el-button>
-          <el-button round>单曲归位</el-button>
-          <el-button round>单个视频循环</el-button>
-          <el-button round>视频列表循环</el-button>
+          <el-button round>音乐</el-button>
+          <el-button round>复位</el-button>
+          <el-button round>单个循环播放</el-button>
+          <el-button round>列表循环播放</el-button>
         </div>
       </el-col>
     </el-row>

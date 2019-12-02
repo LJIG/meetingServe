@@ -1,8 +1,7 @@
 <template>
-  <div id="showPage">
-    <img alt="Vue logo" :src="bgImg" />
-    <h2>主屏幕</h2>
-    <video-box :src="videoStr"/>
+  <div id="showPage" :style="autoCover">
+    <!-- <img v-show="false" alt="Vue logo" :src="bgImg" /> -->
+    <video-box v-show="showVIdeo" :src="videoStr" />
   </div>
 </template>
 
@@ -17,31 +16,41 @@ export default {
   data () {
     return {
       funStr: '',
-      bgImg: './image/logo.png',
-      videoStr: ''
+      bgImg: '/image/logo.png',
+      videoStr: '',
+      showVIdeo: true
     }
   },
   computed: {
+    autoCover () {
+      return {
+        backgroundImage: 'url(' + this.bgImg + ')',
+        backgroundSize: 'auto',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }
+    }
   },
   mounted () {
     this.info()
   },
   methods: {
     setFunStr () {
-      // const now = window.localStorage[Variable]
-      // if (now && now != this.funStr) {
-      //   this.funStr = now
-      //   this.bgImg = now
-      //   window.console.log(now)
-      // }
       const BG_Img = window.localStorage[BACKGROUND_IMG]
       const video_src = window.localStorage[VIDEO_PATH]
       if (BG_Img && BG_Img != this.bgImg) {
         this.bgImg = BG_Img
+        this.changeShowBox(false)
       }
       if (video_src && video_src != this.videoStr) {
         this.videoStr = video_src
+        this.changeShowBox(true)
       }
+    },
+
+    changeShowBox (boolean = false) {
+      // return boolean
+      this.showVIdeo = boolean
     },
     changeStore () {
       setInterval(() => { this.setFunStr() }, 1000)
@@ -55,14 +64,22 @@ export default {
   },
 }
 </script>
-
 <style>
+* {
+  padding: 0;
+  margin: 0;
+}
+</style>
+
+<style scoped>
 #showPage {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background: #000;
+  height: 100vh;
+  width: 100vw;
 }
 </style>
