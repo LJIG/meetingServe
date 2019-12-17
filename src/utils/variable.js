@@ -3,5 +3,6 @@ module.exports = {
   BACKGROUND_IMG: 'background_img',
   IMAGE_PATH: 'image_path',
   VIDEO_PATH: 'video_path',
-  AUDIO_PATH: 'audio_path'
+  AUDIO_PATH: 'audio_path',
+  SHOW_COVER: 'show_cover'
 }

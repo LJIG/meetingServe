@@ -34,7 +34,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import { BACKGROUND_IMG, IMAGE_PATH } from '@/utils/variable'
-const console = window.console
 export default {
   components: {},
   props: {},
@@ -47,7 +46,7 @@ export default {
   },
   watch: {
     fileList (newval) {
-      if(newval){
+      if (newval) {
         this.setFile(newval)
       }
     }
@@ -82,9 +81,9 @@ export default {
       return false
     },
     setImg (path) {
-      console.log(IMAGE_PATH, path)
+      this.postData(IMAGE_PATH, path)
     },
-    bindReset(){
+    bindReset () {
       this.setFile([])
     },
     ...mapActions('file', {

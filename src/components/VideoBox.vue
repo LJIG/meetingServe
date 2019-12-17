@@ -83,6 +83,10 @@ export default {
   margin: 0px;
   width: 100vw;
   height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
 }
 #dplayer {
   height: 100%;

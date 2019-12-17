@@ -8,12 +8,13 @@
       </el-col>
       <el-col :span="19">
         <div class="grid-content bg-purple-light btns">
-          <el-button round>静音</el-button>
-          <el-button round>暂停</el-button>
-          <el-button round>音乐</el-button>
-          <el-button round>复位</el-button>
-          <el-button round>单个循环播放</el-button>
-          <el-button round>列表循环播放</el-button>
+          <el-button
+            round
+            v-for="(item,key) in buttonArr"
+            :type="item.active?'primary':''"
+            :key="key"
+            @click="item.active=!item.active,bindEvent(item)"
+          >{{item.name}}</el-button>
         </div>
       </el-col>
     </el-row>
@@ -21,16 +22,50 @@
 </template>
 
 <script>
+import { SHOW_COVER } from '@/utils/variable.js'
 export default {
   components: {},
   props: {},
   data () {
+    const buttonArr = [{
+      name: '显示主背景',
+      bindKey: SHOW_COVER,
+      active: false
+    }, {
+      name: '静音',
+      active: false
+    }, {
+      name: '暂停',
+      active: false
+    }, {
+      name: '音乐',
+      active: false
+    }, {
+      name: '复位',
+      active: false
+    }, {
+      name: '单个循环播放',
+      active: false
+    }, {
+      name: '列表循环播放',
+      active: false
+    }]
     return {
+      buttonArr
     }
   },
   watch: {},
   computed: {},
-  methods: {},
+  methods: {
+    bindEvent ({ active: _boolean, bindKey: type }) {
+      window.console.log(_boolean, type)
+      if (!type) return
+      this.postData(type, _boolean)
+    },
+    postData (type, _boolean) {
+      window.localStorage.setItem(type, _boolean)
+    }
+  },
   created () { },
   mounted () { }
 }
