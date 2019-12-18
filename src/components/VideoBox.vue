@@ -25,7 +25,7 @@ export default {
     src (newval) {
       this.bindNext(newval)
       this._startPlay()
-      window.console.log(newval)
+      // window.console.log(newval)
     }
   },
   computed: {},
@@ -53,7 +53,7 @@ export default {
     const dp = new DPlayer({
       container: document.getElementById('dplayer'),
       video: {
-        url: './audio/陈奕迅 - 阴天快乐.flac'
+        url: /* '' */ './audio/陈奕迅 - 阴天快乐.flac'
       },
       loop: true,
       lang: 'zh-cn',
@@ -61,19 +61,19 @@ export default {
       hotkey: false,
       logo: './favicon.ico',
       apiBackend: '',
-      highlight: [
-        {
-          time: 3,
-          text: '这是第 3 秒',
-        },
-        {
-          time: 5,
-          text: '这是 5 秒',
-        },
-      ],
+      // highlight: [
+      //   {
+      //     time: 3,
+      //     text: '这是第 3 秒',
+      //   },
+      //   {
+      //     time: 5,
+      //     text: '这是 5 秒',
+      //   },
+      // ],
     })
     this.playerObj = dp
-    window.console.log(dp)
+    this.playerObj.play()
   }
 }
 </script>

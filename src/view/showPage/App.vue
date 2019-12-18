@@ -1,13 +1,33 @@
 <template>
   <div id="showPage" :style="autoCover">
-    <!-- <img alt="Vue logo" :src="imgPath" /> -->
-    <!-- <div :style="ImgCover" /> -->
-    <video-box v-if="this.showVIdeo" :src="videoStr" />
+    <div
+      class="statusTip"
+      :style="{background:'green',position:'fixed',top:0,color:'#fff',textAlign:'left',zIndex:'100'}"
+    >
+      背景主图：{{bgImg}}
+      <br />
+      背景辅图：{{imgPath}}
+      <br />
+      视频：{{videoStr}}
+      <br />
+      音频：{{audioStr}}
+      <br />
+      playerSrc：{{playerStr}}
+      <br />
+      主图显示：{{showMainImg}}
+      <br />
+      player：{{showVIdeo}}
+    </div>
+    <video-box v-show="this.showVIdeo" :src="playerStr" />
   </div>
 </template>
 
 <script>
-import { GETDATA as Variable, BACKGROUND_IMG, VIDEO_PATH, IMAGE_PATH } from '@/utils/variable'
+import {
+  GETDATA as Variable, BACKGROUND_IMG, VIDEO_PATH, IMAGE_PATH,
+  SHOW_COVER, AUDIO_PATH
+} from '@/utils/variable'
+
 import VideoBox from '@/components/VideoBox'
 export default {
   name: 'showPage',
@@ -21,39 +41,55 @@ export default {
       bgImg: '/image/logo.png',
       imgPath: '',
       videoStr: '',
+      playerStr: '',
+      audioStr: '',
       showVIdeo: false,
       showMainImg: false
     }
   },
   computed: {
     autoCover () {
+      // window.console.log(typeof this.showMainImg)
+      const bgImg = this.showMainImg ? this.bgImg : this.imgPath
       return {
-        backgroundImage: 'url(' + (this.showMainImg ? this.bgImg : this.imgPath) + ')',
+        backgroundImage: 'url(' + bgImg + ')',
         backgroundSize: 'auto',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }
-    },
-    // ImgCover () {
-    //   return {
-    //     backgroundImage: 'url(' + this.imgPath + ')',
-    //     backgroundSize: 'auto',
-    //     backgroundPosition: 'center',
-    //     backgroundRepeat: 'no-repeat',
-    //     display: this.showImg ? 'none' : '',
-    //     height: '100%',
-    //     backgroundColor: '#000'
-    //   }
-    // }
+    }
   },
   mounted () {
     this.info()
+  },
+  watch: {
+    audioStr (newVal) {
+      this.playerStr = newVal
+    },
+    videoStr (newVal) {
+      this.playerStr = newVal
+    }
   },
   methods: {
     setFunStr () {
       const BG_Img = window.localStorage[BACKGROUND_IMG]
       const video_src = window.localStorage[VIDEO_PATH]
       const IMG_src = window.localStorage[IMAGE_PATH]
+      const audio_src = window.localStorage[AUDIO_PATH]
+
+      // 状态监听
+      const main_img = window.localStorage[SHOW_COVER]
+
+      if (main_img && main_img != this.showMainImg) {
+        let _boolean = JSON.parse(main_img)
+        this.changeImg(_boolean)
+        this.changeShowBox(false)
+      }
+
+      if (audio_src && audio_src != this.audioStr) {
+        this.audioStr = audio_src
+        this.changeShowBox(false)
+      }
       if (BG_Img && BG_Img != this.bgImg) {
         this.bgImg = BG_Img
         this.changeShowBox(false)
@@ -62,7 +98,6 @@ export default {
       if (video_src && video_src != this.videoStr) {
         this.videoStr = video_src
         this.changeShowBox(true)
-        this.changeImg(false)
       }
       if (IMG_src && IMG_src != this.imgPath) {
         this.imgPath = IMG_src
@@ -72,7 +107,6 @@ export default {
     },
     changeImg (boolean = false) {
       this.showMainImg = boolean
-      window.console.log(this.imgPath, boolean)
     },
     changeShowBox (boolean = false) {
       // return boolean
@@ -88,7 +122,13 @@ export default {
     }
   },
   created () {
-  },
+    window.addEventListener('unload', function () {
+      const store = window.localStorage
+      Object.keys(store).forEach(item => {
+        window.localStorage.removeItem(item)
+      })
+    })
+  }
 }
 </script>
 <style>

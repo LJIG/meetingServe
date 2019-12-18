@@ -58,7 +58,7 @@ export default {
   computed: {},
   methods: {
     bindEvent ({ active: _boolean, bindKey: type }) {
-      window.console.log(_boolean, type)
+      // window.console.log(_boolean, type)
       if (!type) return
       this.postData(type, _boolean)
     },

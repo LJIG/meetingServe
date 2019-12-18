@@ -19,7 +19,7 @@
 </template>
 
 <script>
-let console = window.console
+// let console = window.console
 import { VIDEO_PATH } from '@/utils/variable.js'
 export default {
   components: {},
@@ -34,14 +34,14 @@ export default {
   watch: {
     fileArr (newVal) {
       if (newVal) {
-        console.log(this.fileArr)
+        // console.log(this.fileArr)
       }
     }
   },
   computed: {},
   methods: {
     checkFile (file) {
-      console.log(file)
+      // console.log(file)
       const isType = file.type === 'video/mp4' //|| file.type === 'image/png'
       if (!isType) {
         this.$message.error('所选文件只能是 Video/mp4 格式!')

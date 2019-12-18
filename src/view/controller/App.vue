@@ -6,9 +6,7 @@
     <template slot="aside">
       <Aside />
     </template>
-    <div slot="footer">
-      左右左右BABA
-    </div>
+    <div slot="footer">左右左右BABA</div>
   </Container>
 </template>
 
@@ -27,12 +25,20 @@ export default {
     return {
       width: '10vw'
     }
+  },
+  created () {
+    window.addEventListener('unload', function () {
+      const store = window.localStorage
+      Object.keys(store).forEach(item => {
+        window.localStorage.removeItem(item)
+      })
+    })
   }
 }
 </script>
 
 <style>
-body{
+body {
   margin: 0;
 }
 </style>

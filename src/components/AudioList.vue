@@ -12,15 +12,14 @@
     </el-row>
     <el-row>
       <ul>
-        <li v-for="(item,index) in fileArr" :key="index" @click="setVideo(item)">{{item}}</li>
+        <li v-for="(item,index) in fileArr" :key="index" @click="setAudio(item)">{{item}}</li>
       </ul>
     </el-row>
   </div>
 </template>
 
 <script>
-let console = window.console
-import { VIDEO_PATH } from '@/utils/variable.js'
+import { AUDIO_PATH } from '@/utils/variable.js'
 export default {
   components: {},
   props: {},
@@ -34,14 +33,13 @@ export default {
   watch: {
     fileArr (newVal) {
       if (newVal) {
-        console.log(this.fileArr)
+        // widnow.console.log(this.fileArr)
       }
     }
   },
   computed: {},
   methods: {
     checkFile (file) {
-      console.log(file)
       const isType = file.type === 'audio/mp3' //|| file.type === 'image/png'
       if (!isType) {
         this.$message.error('所选文件只能是 audio/mp3 格式!')
@@ -56,8 +54,8 @@ export default {
       return false
     },
     bindReset () { },
-    setVideo (path) {
-      window.localStorage.setItem(VIDEO_PATH, path)
+    setAudio (path) {
+      window.localStorage.setItem(AUDIO_PATH, path)
     }
   },
   created () { },
