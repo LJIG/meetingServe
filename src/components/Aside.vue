@@ -6,7 +6,7 @@
       round
       @click="changeList(item.file)"
     >{{item.name}}</el-button>
-    <el-button round @click="changeList('task')">任务计划</el-button>
+    <el-button round @click="changeList('task')">任务日程/计划</el-button>
   </div>
 </template>
 

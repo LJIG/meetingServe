@@ -4,7 +4,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import store from '@/store/store.js'
 
-Vue.use(ElementUI);
+Vue.use(ElementUI, { size: 'small' });
 Vue.config.productionTip = false
 
 new Vue({
