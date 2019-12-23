@@ -6,7 +6,9 @@
     <template slot="aside">
       <Aside />
     </template>
-    <div slot="footer">左右左右BABA</div>
+    <div slot="footer">
+    如果有修改(删除、移动、新增)本地文件夹中的文件，请及时修改保持本系统与本地文件一致！！！
+    </div>
   </Container>
 </template>
 
@@ -23,7 +25,7 @@ export default {
   },
   data () {
     return {
-      width: '10vw'
+      width: '7.8vw'
     }
   },
   created () {

@@ -22,17 +22,20 @@
 </template>
 
 <script>
-import { SHOW_COVER } from '@/utils/variable.js'
+import { SHOW_COVER, DPLAYER_EVENT, DPLAYER_EVENT_NAME } from '@/utils/variable.js'
 export default {
   components: {},
   props: {},
   data () {
+    const dplayer_name = DPLAYER_EVENT_NAME
     const buttonArr = [{
       name: '显示主背景',
       bindKey: SHOW_COVER,
       active: false
     }, {
       name: '静音',
+      bindKey: DPLAYER_EVENT,
+      bindKeyName: dplayer_name.VOLUME_SIZE,
       active: false
     }, {
       name: '暂停',
@@ -42,6 +45,8 @@ export default {
       active: false
     }, {
       name: '复位',
+      bindKey: DPLAYER_EVENT,
+      bindKeyName: dplayer_name.RESET_SEEK,
       active: false
     }, {
       name: '单个循环播放',
@@ -57,13 +62,17 @@ export default {
   watch: {},
   computed: {},
   methods: {
-    bindEvent ({ active: _boolean, bindKey: type }) {
-      // window.console.log(_boolean, type)
+    bindEvent ({ active: _boolean, bindKey: type, bindKeyName }) {
       if (!type) return
+      if (type == DPLAYER_EVENT) {
+        const deliverObj = { [bindKeyName]: _boolean }
+        this.postData(type, JSON.stringify(deliverObj))
+        return
+      }
       this.postData(type, _boolean)
     },
-    postData (type, _boolean) {
-      window.localStorage.setItem(type, _boolean)
+    postData (type, deliver) {
+      window.localStorage.setItem(type, deliver)
     }
   },
   created () { },

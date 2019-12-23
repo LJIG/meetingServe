@@ -1,17 +1,20 @@
 <template>
   <div class="wrapper">
     <el-row>
-      <el-col :span="8">
+      <el-col :span="6">
+        <el-button size="small" type="info" @click="bindReset()">创建新目录</el-button>
+      </el-col>
+      <el-col :span="6">
         <el-upload ref="upImg" class="upload-demo" action :before-upload="bindBgImg" :limit="1">
           <el-button size="small" type="success">设置背景主图</el-button>
         </el-upload>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="6">
         <el-upload class="upload-demo" action multiple :before-upload="bindImg">
           <el-button size="small" type="primary">添加背景图</el-button>
         </el-upload>
       </el-col>
-      <el-col :span="8">
+      <el-col :span="6">
         <el-button size="small" type="danger" @click="bindReset()">重新选择</el-button>
       </el-col>
     </el-row>

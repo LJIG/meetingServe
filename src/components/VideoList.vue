@@ -12,10 +12,11 @@
     </el-row>
     <el-row>
       <ol>
-        <li v-for="(item,index) in fileArr" :key="index" @click="setVideo(item)">
+        <li v-for="(item,index) in fileArr" :key="index">
           <el-row>
-            <el-col :span="15">
-              <span>{{item.name}}</span>
+            <el-col :span="1">{{index + 1}}.</el-col>
+            <el-col :span="14">
+              <span @click="setVideo(item)">{{item.name}}</span>
             </el-col>
             <el-col :span="9">
               <el-button @click="deleteItem(index)">删除</el-button>
@@ -80,7 +81,7 @@ export default {
       const type = findArr[findArr.length - 1]
       const regexp = RegExp(`\\.${type}$`)
       const name = _name.replace(regexp, '')
-      return { type, name }
+      return { type, name, originalName: _name }
     },
     editorData (editorObj) {
       const { type, name, index } = editorObj
@@ -134,7 +135,7 @@ export default {
       });
     },
     setVideo (path) {
-      let _path = this.basePath + '/' + path
+      let _path = this.basePath + '/' + path.originalName
       window.localStorage.setItem(VIDEO_PATH, _path)
     }
   },
@@ -150,5 +151,6 @@ export default {
 li {
   line-height: normal;
   text-align: left;
+  list-style: none;
 }
 </style>

@@ -17,15 +17,17 @@
       主图显示：{{showMainImg}}
       <br />
       player：{{showVIdeo}}
+      <br />
+      eventName：{{JSON.stringify(eventName)}}
     </div>
-    <video-box v-show="this.showVIdeo" :src="playerStr" />
+    <video-box v-show="this.showVIdeo" :src="playerStr" :eventName="eventName" />
   </div>
 </template>
 
 <script>
 import {
   GETDATA as Variable, BACKGROUND_IMG, VIDEO_PATH, IMAGE_PATH,
-  SHOW_COVER, AUDIO_PATH
+  SHOW_COVER, AUDIO_PATH, DPLAYER_EVENT //VOLUME_SIZE, RESET_SEEK
 } from '@/utils/variable'
 
 import VideoBox from '@/components/VideoBox'
@@ -44,12 +46,12 @@ export default {
       playerStr: '',
       audioStr: '',
       showVIdeo: false,
-      showMainImg: false
+      showMainImg: false,
+      eventName: ""
     }
   },
   computed: {
     autoCover () {
-      // window.console.log(typeof this.showMainImg)
       const bgImg = this.showMainImg ? this.bgImg : this.imgPath
       return {
         backgroundImage: 'url(' + bgImg + ')',
@@ -79,6 +81,11 @@ export default {
 
       // 状态监听
       const main_img = window.localStorage[SHOW_COVER]
+      const dp_eventName = window.localStorage[DPLAYER_EVENT]
+
+      if (dp_eventName && dp_eventName != this.eventName) {
+        this.eventName = dp_eventName
+      }
 
       if (main_img && main_img != this.showMainImg) {
         let _boolean = JSON.parse(main_img)
@@ -109,9 +116,7 @@ export default {
       this.showMainImg = boolean
     },
     changeShowBox (boolean = false) {
-      // return boolean
       this.showVIdeo = boolean
-      // this.changeModel = this.showVIdeo //'VIDEO' || 'IMG'
     },
     changeStore () {
       setInterval(() => { this.setFunStr() }, 1000)

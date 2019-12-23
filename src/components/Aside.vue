@@ -1,12 +1,13 @@
 <template>
   <div class="wrapper">
     <el-button
+      class="btn_left"
       v-for="(item,index) in fileList"
       :key="index"
       round
       @click="changeList(item.file)"
     >{{item.name}}</el-button>
-    <el-button round @click="changeList('task')">任务日程/计划</el-button>
+    <el-button class="btn_left" round @click="changeList('task')">日程/计划</el-button>
   </div>
 </template>
 
@@ -43,5 +44,11 @@ export default {
 .wrapper {
   padding: 0px;
   margin: 0px;
+}
+.btn_left {
+  margin: 0;
+  display: inline-block;
+  width: 80%;
+  margin: 0 auto;
 }
 </style>
