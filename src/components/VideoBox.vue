@@ -63,6 +63,13 @@ export default {
         window.console.log('重置')
         this._reset()
       }
+      if (key == DPLAYER_EVENT_NAME.STOP_PLAY) {
+        if (jsonObj[key]) {
+          this._stopPlay()
+        } else {
+          this._startPlay()
+        }
+      }
     },
     _startPlay () {
       this.playerObj.play()

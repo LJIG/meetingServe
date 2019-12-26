@@ -39,22 +39,24 @@ export default {
       active: false
     }, {
       name: '暂停',
+      bindKey: DPLAYER_EVENT,
+      bindKeyName: dplayer_name.STOP_PLAY,
       active: false
-    }, {
+    }, /* {
       name: '音乐',
       active: false
-    }, {
+    },  */{
       name: '复位',
       bindKey: DPLAYER_EVENT,
       bindKeyName: dplayer_name.RESET_SEEK,
       active: false
-    }, {
+    }/* , {
       name: '单个循环播放',
       active: false
     }, {
       name: '列表循环播放',
       active: false
-    }]
+    } */]
     return {
       buttonArr
     }

@@ -1,6 +1,6 @@
 <template>
   <div id="showPage" :style="autoCover">
-    <div
+    <!-- <div
       class="statusTip"
       :style="{background:'green',position:'fixed',top:0,color:'#fff',textAlign:'left',zIndex:'100'}"
     >
@@ -19,7 +19,7 @@
       player：{{showVIdeo}}
       <br />
       eventName：{{JSON.stringify(eventName)}}
-    </div>
+    </div> -->
     <video-box v-show="this.showVIdeo" :src="playerStr" :eventName="eventName" />
   </div>
 </template>
@@ -27,7 +27,7 @@
 <script>
 import {
   GETDATA as Variable, BACKGROUND_IMG, VIDEO_PATH, IMAGE_PATH,
-  SHOW_COVER, AUDIO_PATH, DPLAYER_EVENT //VOLUME_SIZE, RESET_SEEK
+  SHOW_COVER, AUDIO_PATH, DPLAYER_EVENT
 } from '@/utils/variable'
 
 import VideoBox from '@/components/VideoBox'
@@ -55,7 +55,8 @@ export default {
       const bgImg = this.showMainImg ? this.bgImg : this.imgPath
       return {
         backgroundImage: 'url(' + bgImg + ')',
-        backgroundSize: 'auto',
+        // backgroundSize: 'auto',
+        backgroundSize: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }

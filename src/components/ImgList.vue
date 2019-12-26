@@ -2,7 +2,7 @@
   <div class="wrapper">
     <el-row>
       <el-col :span="6">
-        <el-button size="small" type="info" @click="bindReset()">创建新目录</el-button>
+        <!-- <el-button size="small" type="info" @click="bindReset()">创建新目录</el-button> -->
       </el-col>
       <el-col :span="6">
         <el-upload ref="upImg" class="upload-demo" action :before-upload="bindBgImg" :limit="1">
@@ -27,7 +27,10 @@
         indicatorPosition="none"
       >
         <el-carousel-item v-for="item in files" :key="item">
-          <img :src="item" alt @click="setImg(item)" />
+          <div class="imgBox">
+            <img :src="item" alt @click="setImg(item)" />
+            <el-button @click="close(item)">删除</el-button>
+          </div>
         </el-carousel-item>
       </el-carousel>
     </el-row>
@@ -60,9 +63,19 @@ export default {
     })
   },
   methods: {
+    close (src) {
+      // window.console.log('关闭', src, this.files)
+      let _tempArr = []
+      this.files.forEach(i => {
+        if (i != src) {
+          _tempArr.push(i)
+        }
+      })
+      this.fileList = _tempArr
+    },
     checkImg (file) {
       const isType = file.type === 'image/jpeg' || file.type === 'image/png'
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isLt2M = true || file.size / 1024 / 1024 < 2
 
       if (!isType) {
         this.$message.error('所选图片只能是 JPG/PNG 格式!')
@@ -108,6 +121,14 @@ export default {
 }
 .imgList {
   margin-top: 3rem;
+}
+.imgBox {
+  position: relative;
+}
+.imgBox button {
+  position: absolute;
+  top: 3px;
+  left: 3px;
 }
 .el-carousel__item img {
   width: 100%;
