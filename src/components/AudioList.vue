@@ -35,9 +35,9 @@ export default {
   components: {},
   props: {},
   data () {
-    let path = window.location.origin
+    // let path = window.location.origin
     return {
-      basePath: `${path}/audio`,
+      basePath: `${window.localStorage.originPath}/audio`,
       fileArr: []
     }
   },

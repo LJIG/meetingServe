@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div class="leftBG">
-      <a href="showPage" target="_blank">主屏内容</a>
+      <a href="showPage.html" target="_blank">主屏内容</a>
     </div>
     <div class="rightBG">
-      <a href="controller" target="_blank">资源控制</a>
+      <a href="controller.html" target="_blank">资源控制</a>
     </div>
     <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
   </div>
@@ -22,6 +22,20 @@ export default {
         window.localStorage.removeItem(item)
       })
     })
+    function originPathFn () {
+      let _origin = window.location.origin
+      if (_origin == 'file://') {
+        let href = window.location.href
+        let hrefArr = href.split('/')
+        let len = hrefArr.length
+        hrefArr.length = len - 1
+        _origin = hrefArr.join('/')
+      }
+      return _origin
+    }
+    const originPath = originPathFn()
+    window.localStorage.originPath = originPath
+    // const Tel = [~[] * ~[], '8', '6', +[], +[], '6', '4', '9', '4', '8', +[]]
   }
 }
 </script>
@@ -31,7 +45,7 @@ export default {
   margin: 0;
   padding: 0;
 }
-:root{
+:root {
   --leftColor: #503e3e;
   --rightColor: #6cc197;
 }

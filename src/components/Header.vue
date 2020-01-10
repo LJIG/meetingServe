@@ -50,7 +50,7 @@ export default {
       bindKey: DPLAYER_EVENT,
       bindKeyName: dplayer_name.RESET_SEEK,
       active: false
-    }/* , {
+    },/* , {
       name: '单个循环播放',
       active: false
     }, {

@@ -50,9 +50,7 @@ export default {
     monitorEventName (obj) {
       let jsonObj = JSON.parse(obj)
       let key = Object.keys(jsonObj)[0]
-      window.console.log('获取监听对象', obj, JSON.parse(obj))
       if (key == DPLAYER_EVENT_NAME.VOLUME_SIZE) {
-        window.console.log('音量')
         if (jsonObj[key]) {
           this._stopVolume()
         } else {
@@ -60,7 +58,6 @@ export default {
         }
       }
       if (key == DPLAYER_EVENT_NAME.RESET_SEEK) {
-        window.console.log('重置')
         this._reset()
       }
       if (key == DPLAYER_EVENT_NAME.STOP_PLAY) {
@@ -72,8 +69,13 @@ export default {
       }
     },
     _startPlay () {
-      this.playerObj.play()
-      this.playerObj.fullScreen.request('browser');
+      let that = this
+      window.setTimeout(function () {
+        // this._startPlay()
+        window.console.log(1)
+        that.playerObj.play()
+      }, 300)
+      // this.playerObj.fullScreen.request('browser');
     },
     _stopPlay () {
       this.playerObj.pause()
@@ -98,6 +100,18 @@ export default {
     },
     _reset () {
       this.playerObj.seek(0)
+    },
+    hiddenController () {
+      const nodeName = [
+        'dplayer-controller-mask',
+        'dplayer-controller',
+        'dplayer-notice'
+      ]
+
+      nodeName.forEach(i => {
+        let node = document.querySelector(`.${i}`)
+        node.style.display = 'none'
+      })
     }
   },
   created () {
@@ -106,7 +120,7 @@ export default {
     const dp = new DPlayer({
       container: document.getElementById('dplayer'),
       video: {
-        url: /* '' */ './audio/陈奕迅 - 阴天快乐.flac'
+        url: '' /* './audio/陈奕迅 - 阴天快乐.flac'*/
       },
       loop: true,
       lang: 'zh-cn',
@@ -127,7 +141,7 @@ export default {
     })
     this.playerObj = dp
     this.playerObj.play()
-    window.console.log(dp)
+    this.hiddenController()
   }
 }
 </script>

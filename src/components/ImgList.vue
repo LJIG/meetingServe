@@ -44,9 +44,9 @@ export default {
   components: {},
   props: {},
   data () {
-    const path = window.location.origin
+    // const path = window.location.origin
     return {
-      basePath: `${path}/image`,
+      basePath: `${window.localStorage.originPath}/image`,
       fileList: []
     }
   },

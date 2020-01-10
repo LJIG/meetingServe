@@ -36,9 +36,9 @@ export default {
   components: {},
   props: {},
   data () {
-    let path = window.location.origin
+    // let path = window.location.origin
     return {
-      basePath: `${path}/video`,
+      basePath: `${window.localStorage.originPath}/video`,
       fileArr: []
     }
   },
